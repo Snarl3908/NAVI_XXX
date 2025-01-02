@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/siteConfig";
 
-const { title, description, url, socialImage } = siteConfig;
+const { title, description, siteUrl, socialImage } = siteConfig;
 ---
 
 <!doctype html>
@@ -20,7 +20,7 @@ const { title, description, url, socialImage } = siteConfig;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:url" content={url} />
+    <meta property="og:url" content={siteUrl} />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -32,7 +32,7 @@ const { title, description, url, socialImage } = siteConfig;
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": {url},
+        "url": {siteUrl},
         "name": {title},
         "description": {description}
       }
