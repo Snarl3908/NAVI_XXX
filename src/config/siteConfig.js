@@ -2,7 +2,7 @@ export const siteConfig = {
   // SEO and Meta information
   seo: {
     // Website title used in browser tab, search results, and social sharing
-    title: "Test",
+    title: "TestX",
     // Website description for search engines and social sharing
     description: "KKK",
     // Base URL of the website, used for canonical links and social sharing
