@@ -1,12 +1,8 @@
 ---
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/siteConfig";
 
-const title =
-  "Placeholder title of your website";
-const description =
-  "Placeholder description of your website";
-const url = "https://placeholder.com";
-const image = "/public/preview.webp";
+const { title, description, url, socialImage } = siteConfig;
 ---
 
 <!doctype html>
@@ -19,28 +15,26 @@ const image = "/public/preview.webp";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>
-      {title}
-    </title>
+    <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={socialImage} />
     <meta property="og:url" content={url} />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
+    <meta property="twitter:image" content={socialImage} />
 
     <script type="application/ld+json">
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "https://placeholder.com",
-        "name":   "Placeholder title of your website",
-        "description": "Placeholder title of your website"
+        "url": {url},
+        "name": {title},
+        "description": {description}
       }
     </script>
 
