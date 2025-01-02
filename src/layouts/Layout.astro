@@ -15,7 +15,10 @@ const { title = siteConfig.seo.title, description = siteConfig.seo.description }
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={siteConfig.seo.favicon.default} />
+    {siteConfig.seo.favicon.icons?.map(icon => (
+      <link rel={icon.rel} type={icon.type} sizes={icon.sizes} href={icon.href} />
+    ))}
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href={siteConfig.seo.siteUrl} />

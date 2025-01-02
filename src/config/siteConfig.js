@@ -9,6 +9,17 @@ export const siteConfig = {
     siteUrl: "https://placeholder.com",
     // Default social sharing image (OpenGraph and Twitter)
     socialImage: "/preview.webp",
+    // Favicon configuration
+    favicon: {
+      // Default favicon
+      default: "/favicon.svg",
+      // Optional: different sizes/types of favicons
+      // icons: [
+      //   { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      //   { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      //   { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }
+      // ]
+    },
     // 添加更多 SEO 相关配置
     sitemap: {
       lastmod: "2024-12-24",
