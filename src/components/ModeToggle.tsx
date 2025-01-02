@@ -7,15 +7,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Moon, Sun } from "lucide-react";
 import * as React from "react";
+import { siteConfig } from "@/config/siteConfig";
 
 export function ModeToggle() {
   const [theme, setThemeState] = React.useState<
-    "theme-light" | "dark" | "system"
-  >("theme-light");
+    "light" | "dark" | "system"
+  >(siteConfig.theme.defaultMode);
 
   React.useEffect(() => {
     const isDarkMode = document.documentElement.classList.contains("dark");
-    setThemeState(isDarkMode ? "dark" : "theme-light");
+    setThemeState(isDarkMode ? "dark" : "light");
   }, []);
 
   React.useEffect(() => {
@@ -40,7 +41,7 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemeState("theme-light")}>
+        <DropdownMenuItem onClick={() => setThemeState("light")}>
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setThemeState("dark")}>

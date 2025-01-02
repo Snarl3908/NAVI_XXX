@@ -60,7 +60,7 @@ export default function ListWebsites() {
               </p>
               <div className="flex flex-wrap gap-1">
                 {website.tags.map((tag) => (
-                  <Badge className="px-1 py-0">{tag}</Badge>
+                  <Badge key={tag} className="px-1 py-0">{tag}</Badge>
                 ))}
               </div>
             </div>

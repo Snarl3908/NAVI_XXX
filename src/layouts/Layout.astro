@@ -1,76 +1,79 @@
 ---
-import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/siteConfig";
 
-const { title, description, siteUrl, socialImage, themeMode } = siteConfig;
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = siteConfig.seo.title, description = siteConfig.seo.description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class={siteConfig.theme.defaultMode === 'dark' ? 'dark' : ''}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
-
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href={siteConfig.seo.siteUrl} />
     <title>{title}</title>
-    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteConfig.seo.siteUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImage} />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={siteConfig.seo.socialImage} />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteConfig.seo.siteUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImage} />
+    <meta property="twitter:image" content={siteConfig.seo.socialImage} />
 
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": {siteUrl},
-        "name": {title},
-        "description": {description}
+    <style is:inline define:vars={{
+      'theme-accent': siteConfig.theme.styles.colors.accent,
+      'theme-accent-light': siteConfig.theme.styles.colors.accentLight,
+      'theme-accent-dark': siteConfig.theme.styles.colors.accentDark,
+      'theme-font-system': siteConfig.theme.styles.fonts.system,
+      'theme-font-code': siteConfig.theme.styles.fonts.code
+    }}>
+      :root {
+        --theme-accent: var(--theme-accent);
+        --theme-accent-light: var(--theme-accent-light);
+        --theme-accent-dark: var(--theme-accent-dark);
+        --theme-font-system: var(--theme-font-system);
+        --theme-font-code: var(--theme-font-code);
       }
-    </script>
-
-    <!-- Script for light/dark mode -->
-    <script is:inline>
-      const getThemePreference = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        if (themeMode === "system") {
-          return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        }
-        return themeMode;
-      };
-
-      const isDark = getThemePreference() === "dark";
-      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-      if (typeof localStorage !== "undefined") {
-        const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.classList.contains("dark");
-          localStorage.setItem("theme", isDark ? "dark" : "light");
-        });
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["class"],
-        });
-      }
-    </script>
+    </style>
   </head>
-  <body class={cn("bg-background font-sans text-primary")}>
+  <body>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  :root {
+    --accent: var(--theme-accent);
+    --accent-light: var(--theme-accent-light);
+    --accent-dark: var(--theme-accent-dark);
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: var(--theme-font-system);
+    background: #13151a;
+    background-size: 224px;
+  }
+  code {
+    font-family: var(--theme-font-code);
+  }
+</style>
