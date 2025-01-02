@@ -7,6 +7,12 @@ export const siteConfig = {
     description: "KKK",
     // Base URL of the website, used for canonical links and social sharing
     siteUrl: "https://placeholder.com",
+    // Robots.txt configuration
+    robots: {
+      userAgent: "*",
+      allow: ["/"],
+      disallow: [] // optional: add paths you want to disallow
+    },
     // Default social sharing image (OpenGraph and Twitter)
     socialImage: "/preview.webp",
     // Favicon configuration

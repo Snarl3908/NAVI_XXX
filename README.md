@@ -86,6 +86,13 @@ seo: {
     lastmod: "2024-12-24",
     changefreq: "weekly",
     priority: 1.0
+  },
+  
+  // Robots.txt configuration
+  robots: {
+    userAgent: "*",        // User-agent string
+    allow: ["/"],         // Paths to allow
+    disallow: []          // Paths to disallow
   }
 }
 ```
