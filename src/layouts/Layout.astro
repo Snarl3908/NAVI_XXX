@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/siteConfig";
 
-const { title, description, siteUrl, socialImage } = siteConfig;
+const { title, description, siteUrl, socialImage, themeMode } = siteConfig;
 ---
 
 <!doctype html>
@@ -47,10 +47,14 @@ const { title, description, siteUrl, socialImage } = siteConfig;
         ) {
           return localStorage.getItem("theme");
         }
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+        if (themeMode === "system") {
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        return themeMode;
       };
+
       const isDark = getThemePreference() === "dark";
       document.documentElement.classList[isDark ? "add" : "remove"]("dark");
 

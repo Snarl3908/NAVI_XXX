@@ -10,4 +10,7 @@ export const siteConfig = {
 
   // The URL of the image used for social media sharing previews (Open Graph and Twitter Cards).
   socialImage: "/public/preview.webp",
+
+  // Theme mode: 'light', 'dark', or 'system'
+  themeMode: "light",
 }; 
