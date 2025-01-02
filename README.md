@@ -144,14 +144,12 @@ social: {
   github: {
     url: "https://github.com/yourusername",
     label: "GitHub",
-    icon: "github",
-    svg: "..." // SVG path for the icon
+    icon: "Github"
   },
   twitter: {
     url: "https://twitter.com/yourhandle",
     label: "Twitter",
-    icon: "twitter",
-    svg: "..." // SVG path for the icon
+    icon: "Twitter"
   }
 }
 ```

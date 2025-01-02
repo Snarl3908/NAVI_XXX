@@ -7,7 +7,7 @@ import ListWebsites from "@/components/ListWebsites";
 import ListTags from "@/components/ListTags";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
-import { Globe } from "lucide-react";
+import { Globe, Github, Twitter, Coffee } from "lucide-react";
 import { siteConfig } from "@/config/siteConfig";
 
 const { title, description } = siteConfig;
@@ -43,29 +43,20 @@ const { title, description } = siteConfig;
           class="flex flex-col-reverse items-center justify-between gap-2 md:flex-row"
         >
           <p class="text-muted-foreground">
-            {siteConfig.footer.text.prefix} <a
+            {siteConfig.social.footer.prefix} <a
               class="underline"
-              href={siteConfig.social.website.url}
+              href={siteConfig.social.links.website.url}
               target="_blank">{siteConfig.author.handle}</a
             >
           </p>
           <div class="flex items-center gap-1">
-            {Object.values(siteConfig.social).map((social) => (
+            {Object.values(siteConfig.social.links).map((social) => (
               <a href={social.url} target="_blank">
                 <Button variant="ghost" size="icon">
-                  {social.icon === "Globe" ? (
-                    <Globe />
-                  ) : (
-                    <svg
-                      role="img"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                    >
-                      <title>{social.label}</title>
-                      {social.svg}
-                    </svg>
-                  )}
+                  {social.icon === "Globe" && <Globe />}
+                  {social.icon === "Github" && <Github />}
+                  {social.icon === "Twitter" && <Twitter />}
+                  {social.icon === "Coffee" && <Coffee />}
                 </Button>
               </a>
             ))}
