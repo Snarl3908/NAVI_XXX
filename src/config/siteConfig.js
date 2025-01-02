@@ -28,6 +28,19 @@ export const siteConfig = {
     }
   },
 
+  // Hero section configuration
+  hero: {
+    title: {
+      strong: "NAVI 2 ICT",
+      light: "The Tools With Love"
+    },
+    styles: {
+      wrapper: "mb-6 text-4xl leading-tight",
+      strong: "font-bold",
+      light: "font-light"
+    }
+  },
+
   // Author information
   author: {
     // Author's display name
