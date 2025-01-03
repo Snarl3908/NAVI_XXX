@@ -58,7 +58,7 @@
 }
 @layer base {
   * {
-    border-color: var(--border);
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
