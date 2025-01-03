@@ -3,31 +3,49 @@ import dataWebsites from "@/data/websites.json";
 import { cn } from "@/lib/utils";
 import { filteredTags, searchKeyword } from "@/store";
 import { useStore } from "@nanostores/react";
-import { useMemo } from "react";
+import { useMemo, useEffect, useRef } from "react";
+import { logger } from '@/lib/logger';
 
 export default function ListWebsites() {
   const search = useStore(searchKeyword);
   const tags = useStore(filteredTags);
+  const prevFilters = useRef({ search: '', tags: [] });
+
+  // 只在过滤条件真正改变时记录日志
+  useEffect(() => {
+    const currentFilters = { search, tags };
+    if (JSON.stringify(prevFilters.current) !== JSON.stringify(currentFilters)) {
+      logger.log('Filters changed from:', prevFilters.current, 'to:', currentFilters);
+      prevFilters.current = currentFilters;
+    }
+  }, [search, tags]);
 
   const filteredWebsites = useMemo(() => {
-    if (!search && tags.length === 0) return dataWebsites;
+    // 避免重复的初始化日志
+    if (!search && tags.length === 0) {
+      return dataWebsites;
+    }
     
-    const searchTerm = (search || '').toLowerCase();
+    const searchTerm = (search || '').toLowerCase().trim();
     
-    return dataWebsites.filter((website) => {
-      // 首先检查标签匹配
+    const filtered = dataWebsites.filter((website) => {
       const tagMatch = tags.length === 0 || tags.every((tag) => 
         (website.tags as string[]).includes(tag)
       );
-
-      // 然后检查搜索关键词匹配
-      const searchMatch = !searchTerm || 
-        (website.title?.toLowerCase() || '').includes(searchTerm) ||
-        (website.description?.toLowerCase() || '').includes(searchTerm);
-
-      // 两个条件都满足才返回 true
+      
+      const searchMatch = !searchTerm || [
+        website.title,
+        website.description,
+        ...(website.tags || [])
+      ].some(text => 
+        (text || '').toLowerCase().includes(searchTerm)
+      );
+      
       return tagMatch && searchMatch;
     });
+    
+    logger.log('Filtered results:', filtered.length);
+    return filtered;
   }, [search, tags]);
 
   return (

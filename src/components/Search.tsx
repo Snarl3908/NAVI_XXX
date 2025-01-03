@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { searchKeyword } from "@/store";
+import { searchKeyword, filteredTags } from "@/store";
 import { Search as SearchIcon, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { logger } from "@/lib/logger";
 
 export default function Search({ className }: { className?: string }) {
   const [search, setSearch] = useState("");
@@ -26,12 +27,26 @@ export default function Search({ className }: { className?: string }) {
   };
 
   const onClear = () => {
-    if (search !== "") setSearch("");
-    searchKeyword.set("");
+    setSearch('');
+    searchKeyword.set('');
   };
 
   const onSearch = () => {
-    searchKeyword.set(search);
+    try {
+      const trimmedSearch = search.trim().toLowerCase();
+      logger.log('Searching for:', trimmedSearch);
+      
+      filteredTags.set([]);
+      
+      if (!trimmedSearch) {
+        searchKeyword.set('');
+        return;
+      }
+      
+      searchKeyword.set(trimmedSearch);
+    } catch (error) {
+      logger.log('Error setting search keyword:', error);
+    }
   };
 
   return (

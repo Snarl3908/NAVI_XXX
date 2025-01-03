@@ -5,9 +5,11 @@ import { useStore } from "@nanostores/react";
 import { X } from "lucide-react";
 import { useMemo } from "react";
 import { Button } from "./ui/button";
+import { logger } from "@/lib/logger";
+import { searchKeyword } from "@/store";
 
 export default function ListTags() {
-  const selectedTags: string[] = useStore(filteredTags);
+  const selectedTags = useStore(filteredTags);
 
   const tags = useMemo(() => {
     const tags = new Set<string>();
@@ -16,6 +18,30 @@ export default function ListTags() {
     });
     return Array.from(tags).sort((a, b) => a.localeCompare(b));
   }, []);
+
+  const handleTagClick = (tag: string) => {
+    try {
+      const selected = selectedTags.includes(tag);
+      logger.log('Tag clicked:', tag, 'Selected:', selected);
+      
+      searchKeyword.set('');
+      
+      const newTags = selected
+        ? selectedTags.filter((t) => t !== tag)
+        : [...selectedTags, tag];
+      
+      logger.log('New tags:', newTags);
+      
+      if (newTags.length === 0) {
+        filteredTags.set([]);
+        return;
+      }
+      
+      filteredTags.set(newTags);
+    } catch (error) {
+      logger.log('Error handling tag click:', error);
+    }
+  };
 
   return (
     <div
@@ -31,13 +57,7 @@ export default function ListTags() {
             key={tag}
             size="sm"
             variant={selected ? "default" : "outline"}
-            onClick={() =>
-              filteredTags.set(
-                selected
-                  ? selectedTags.filter((e) => e !== tag)
-                  : [...selectedTags, tag],
-              )
-            }
+            onClick={() => handleTagClick(tag)}
             className={cn(
               "flex cursor-pointer items-center gap-2 transition-all",
             )}
