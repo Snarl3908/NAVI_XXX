@@ -11,15 +11,20 @@ export default function ListWebsites() {
 
   const filteredWebsites = useMemo(() => {
     if (!search && tags.length === 0) return dataWebsites;
+    
     return dataWebsites.filter((website) => {
-      if (
-        tags.length > 0 &&
-        !tags.every((tag) => (website.tags as string[]).includes(tag))
-      ) {
-        return false;
-      }
-      if (!website.title.toLowerCase().includes(search)) return false;
-      return true;
+      // 首先检查标签匹配
+      const tagMatch = tags.length === 0 || tags.every((tag) => 
+        (website.tags as string[]).includes(tag)
+      );
+
+      // 然后检查搜索关键词匹配
+      const searchMatch = !search || 
+        website.title.toLowerCase().includes(search.toLowerCase()) ||
+        website.description.toLowerCase().includes(search.toLowerCase());
+
+      // 两个条件都满足才返回 true
+      return tagMatch && searchMatch;
     });
   }, [search, tags]);
 
