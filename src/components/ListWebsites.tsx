@@ -12,6 +12,8 @@ export default function ListWebsites() {
   const filteredWebsites = useMemo(() => {
     if (!search && tags.length === 0) return dataWebsites;
     
+    const searchTerm = (search || '').toLowerCase();
+    
     return dataWebsites.filter((website) => {
       // 首先检查标签匹配
       const tagMatch = tags.length === 0 || tags.every((tag) => 
@@ -19,9 +21,9 @@ export default function ListWebsites() {
       );
 
       // 然后检查搜索关键词匹配
-      const searchMatch = !search || 
-        website.title.toLowerCase().includes(search.toLowerCase()) ||
-        website.description.toLowerCase().includes(search.toLowerCase());
+      const searchMatch = !searchTerm || 
+        (website.title?.toLowerCase() || '').includes(searchTerm) ||
+        (website.description?.toLowerCase() || '').includes(searchTerm);
 
       // 两个条件都满足才返回 true
       return tagMatch && searchMatch;
@@ -52,7 +54,7 @@ export default function ListWebsites() {
                   website.favicon ||
                   "https://placehold.co/400?text=No%20Picture"
                 }
-                alt={website.title}
+                alt={website.title || ''}
                 className="aspect-square w-full rounded object-cover"
               />
             </div>
@@ -64,7 +66,7 @@ export default function ListWebsites() {
                 {website.description}
               </p>
               <div className="flex flex-wrap gap-1">
-                {website.tags.map((tag) => (
+                {website.tags?.map((tag) => (
                   <Badge key={tag} className="px-1 py-0">{tag}</Badge>
                 ))}
               </div>

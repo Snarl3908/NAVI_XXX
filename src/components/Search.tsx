@@ -14,6 +14,13 @@ export default function Search({ className }: { className?: string }) {
     setIsDark(isDark);
   }, []);
 
+  useEffect(() => {
+    searchKeyword.set("");
+    return () => {
+      searchKeyword.set("");
+    };
+  }, []);
+
   const onClickSearch = () => {
     onSearch();
   };
