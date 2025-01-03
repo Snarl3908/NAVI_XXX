@@ -64,14 +64,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist[wght].ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/GeistMono[wght].ttf") format("truetype");
-  font-display: swap;
-}
