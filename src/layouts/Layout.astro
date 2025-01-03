@@ -22,6 +22,7 @@ const { title = siteConfig.seo.title, description = siteConfig.seo.description }
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href={siteConfig.seo.siteUrl} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>{title}</title>
 
     <!-- Open Graph / Facebook -->
@@ -53,6 +54,7 @@ const { title = siteConfig.seo.title, description = siteConfig.seo.description }
         --theme-font-code: var(--theme-font-code);
       }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <slot />
@@ -72,11 +74,11 @@ const { title = siteConfig.seo.title, description = siteConfig.seo.description }
     );
   }
   html {
-    font-family: var(--theme-font-system);
+    font-family: 'Source Code Pro', var(--theme-font-system);
     background: #13151a;
     background-size: 224px;
   }
   code {
-    font-family: var(--theme-font-code);
+    font-family: 'Source Code Pro', var(--theme-font-code);
   }
 </style>

@@ -66,22 +66,22 @@ export const siteConfig = {
       website: {
         url: "https://KKKX.me",
         label: "Personal Website",
-        icon: "Globe"
+        icon: "fa-solid fa-globe"
       },
       github: {
         url: "https://github.com/KKK-me",
         label: "GitHub",
-        icon: "Github"
+        icon: "fa-brands fa-github"
       },
       twitter: {
         url: "https://x.com/KKK_me",
         label: "Twitter",
-        icon: "Twitter"
+        icon: "fa-brands fa-twitter"
       },
       buyMeACoffee: {
         url: "https://buymeacoffee.com/KKK_me",
         label: "Buy Me A Coffee",
-        icon: "Coffee"
+        icon: "fa-solid fa-mug-hot"
       }
     }
   },
@@ -99,8 +99,8 @@ export const siteConfig = {
         accentDark: "49, 10, 101",
       },
       fonts: {
-        system: "system-ui, sans-serif",
-        code: "Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace"
+        system: "'Source Code Pro', system-ui, sans-serif",
+        code: "'Source Code Pro', Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace"
       },
       components: {
         navIcon: {

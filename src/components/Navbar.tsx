@@ -8,7 +8,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { Home, Github, Coffee } from "lucide-react";
 import { siteConfig } from "@/config/siteConfig";
 
 function NavIcon({
@@ -18,7 +17,7 @@ function NavIcon({
   target,
   onClick,
 }: {
-  icon: React.ReactNode;
+  icon: string;
   tooltip: string;
   href?: string;
   target?: string;
@@ -41,7 +40,7 @@ function NavIcon({
             ...theme.styles.components.navIcon.base
           )}
         >
-          {icon}
+          <i className={icon}></i>
         </a>
       </TooltipTrigger>
       <TooltipContent>
@@ -70,22 +69,22 @@ export default function Navbar() {
             "bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]",
           )}
         >
-          <NavIcon icon={<Home />} tooltip="Home" href="/" />
+          <NavIcon icon="fa-solid fa-home" tooltip="Home" href="/" />
           <NavIcon
-            icon={<Github />}
+            icon="fa-brands fa-github"
             tooltip="Source code of this website theme"
             href={links.github.url}
             target="_blank"
           />
           <NavIcon
-            icon={<Coffee />}
+            icon="fa-solid fa-mug-hot"
             tooltip="This template on Astro theme"
             href="https://astro.build"
             target="_blank"
           />
           <Separator orientation="vertical" className="my-2 h-full" />
           <NavIcon
-            icon={<Coffee />}
+            icon="fa-solid fa-mug-hot"
             tooltip="Buy me a coffee"
             href={links.buyMeACoffee.url}
             target="_blank"
